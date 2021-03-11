@@ -1,0 +1,6 @@
+use_frameworks!
+target 'FJZuJianhuaOne_Tests' do
+  pod 'FJZuJianhuaOne', :path => '../'
+  
+  
+end
