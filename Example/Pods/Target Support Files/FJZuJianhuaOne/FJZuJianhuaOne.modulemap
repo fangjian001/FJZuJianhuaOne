@@ -1,0 +1,6 @@
+framework module FJZuJianhuaOne {
+  umbrella header "FJZuJianhuaOne-umbrella.h"
+
+  export *
+  module * { export * }
+}

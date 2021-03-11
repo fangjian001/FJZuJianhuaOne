@@ -1,0 +1,16 @@
+PODS:
+  - FJZuJianhuaOne (0.1.0)
+
+DEPENDENCIES:
+  - FJZuJianhuaOne (from `../`)
+
+EXTERNAL SOURCES:
+  FJZuJianhuaOne:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FJZuJianhuaOne: 6ebca8532060d626bfbee82b362c395e19398afd
+
+PODFILE CHECKSUM: 1412b436c3056fc0f536f71a2482204c3a02c65d
+
+COCOAPODS: 1.10.0
