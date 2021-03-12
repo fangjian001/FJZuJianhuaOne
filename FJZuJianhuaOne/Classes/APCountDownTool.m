@@ -116,69 +116,6 @@ APCountDownTool *tool;
     }
 }
 
-+ (void)countDownWithTime:(long long)time block:(void(^)(NSString * day, NSString *time, NSString * minute))block{
-    if (time <= 0) {
-        return;
-    }
-    tool = [[APCountDownTool alloc] init];
-    __block double countDownTime = time - tool.passSecond;
-    __block NSString *daysString;
-    __block NSString *hoursString;
-    __block NSString *minuteString;
-    __block NSString *secondString;
-    
-    dispatch_queue_t queue = dispatch_queue_create("timer", DISPATCH_QUEUE_CONCURRENT);
-    tool.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(tool.timer, dispatch_walltime(NULL, 0), 1.0 * NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(tool.timer, ^{
-        if (countDownTime <= 0) {
-            dispatch_source_cancel(tool.timer);
-            tool.timer = nil;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(@"0",@"0",@"0");
-            });
-        }else{
-            NSInteger days = countDownTime / (24 * 3600);
-            NSInteger hours = (countDownTime - days * 24 * 3600) / 3600;
-            NSInteger minute = (countDownTime - days * 24 * 3600 - hours * 3600) / 60;
-            NSInteger second = countDownTime - days * 24 * 3600 - hours * 3600 - minute * 60;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                daysString = [NSString stringWithFormat:@"%zd",days];
-                if (hours < 10) {
-                    hoursString = [NSString stringWithFormat:@"0%zd",hours];
-                }else{
-                    hoursString = [NSString stringWithFormat:@"%zd",hours];
-                }
-                if (minute < 10) {
-                    minuteString = [NSString stringWithFormat:@"0%zd",minute];
-                }else{
-                    minuteString = [NSString stringWithFormat:@"%zd",minute];
-                }
-                if (second < 10) {
-                    secondString = [NSString stringWithFormat:@"0%zd",second];
-                }else{
-                    secondString = [NSString stringWithFormat:@"%zd",second];
-                }
-                block(daysString,hoursString,minuteString);
-            });
-            countDownTime --;
-            tool.passSecond ++;
-        }
-    });
-    dispatch_resume(tool.timer);
-}
-
-+ (void)destoryTimer{
-    if (tool.timer) {
-        dispatch_source_cancel(tool.timer);
-        tool.timer = nil;
-        tool.passSecond = 0;
-    }
-}
-
-+ (long long)getSecondBegTime: (NSString *)begTime endTime: (NSString *)endTime {
-    return [[[APCountDownTool alloc] init] getSecondBegTime:begTime endTime:endTime];
-}
 
 
 @end

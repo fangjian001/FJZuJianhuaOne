@@ -33,19 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)destoryTimer;
 
-/**
- 倒计时
- @param time 总时间（s）
- */
-+ (void)countDownWithTime:(long long)time block:(void(^)(NSString * day, NSString *time, NSString * minute))block;
-/**
- 销毁定时器
- */
-+ (void)destoryTimer;
-/**
- 获取时长（秒）
- */
-+ (long long)getSecondBegTime: (NSString *)begTime endTime: (NSString *)endTime;
 
 @end
 
